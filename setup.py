@@ -27,7 +27,7 @@ def get_version_and_cmdclass(pkg_path):
     spec.loader.exec_module(module)
     return module.__version__, module.get_cmdclass(pkg_path)
 
-version, cmdclass = get_version_and_cmdclass('GoatGasDriver')
+version, cmdclass = get_version_and_cmdclass('rems_arduino')
 
 
 with open('requirements.txt') as f:
