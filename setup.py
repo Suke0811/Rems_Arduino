@@ -8,37 +8,15 @@ def read(rel_path):
     with codecs.open(os.path.join(here, rel_path), 'r') as fp:
         return fp.read()
 
-def get_metadata(field):
-    rel_path = "rems_arduino/__init__.py"
-    for line in read(rel_path).splitlines():
-        if line.startswith(f'__{field}__'):
-            delim = '"' if '"' in line else "'"
-            return line.split(delim)[1]
-    else:
-        raise RuntimeError(f"Unable to find {field} string.")
-
-# Loads _version.py module without importing the whole package.
-def get_version_and_cmdclass(pkg_path):
-    from importlib.util import module_from_spec, spec_from_file_location
-    spec = spec_from_file_location(
-        'version', os.path.join(pkg_path, '_version.py'),
-    )
-    module = module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module.__version__, module.get_cmdclass(pkg_path)
-
-version, cmdclass = get_version_and_cmdclass('rems_arduino')
-
 
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
 setup(
-    name='rems_arduino',
-    version='0.1.0',
-    cmdclass=cmdclass,
-    description=get_metadata('description'),
-    author=get_metadata('author'),
+    name='REMS Arduino',
+    version='0.1',
+    description='REMS Arduino driver and firmware',
+    author='Yusuke Tanaka',
     license='LGPLv3',
     packages=find_packages(include=['rems_arduino', 'rems_arduino.*']),
     install_requires=requirements,
