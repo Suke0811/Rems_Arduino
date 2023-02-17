@@ -67,7 +67,7 @@ class ArduinoCommonApi:
 
     def write(self, pin, value):
         self.device.write(self.to_byte_com(COMMAND.write + str(pin) + str(value)))
-        time.sleep(0.1)
+        time.sleep(0.001)
 
     def read(self, pin):
         self.device.write(self.to_byte_com(COMMAND.create(COMMAND.read, str(pin))))
